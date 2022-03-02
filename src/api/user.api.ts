@@ -29,17 +29,12 @@ export async function getCurrentUser() {
   const url = `${BACKEND_URL}/user/current`;
 
   try {
-    const response = await axios.get(url, {
+    const { data, status } = await axios.get(url, {
       responseType: "json",
       withCredentials: true,
     });
 
-    console.log(response);
-
-    return {
-      status: response.status,
-      data: response.data,
-    };
+    return { status, data };
   } catch (error) {
     return ApiUtils.handle<UserType>(error, {
       id: "",

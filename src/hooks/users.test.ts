@@ -8,11 +8,12 @@ import { useUsers } from "./users.hook";
 jest.mock("../api", () => ({
   UserApi: { getAll: jest.fn() },
 }));
+
 jest.mock("react-router-dom");
 
 const getAll = UserApi.getAll as jest.MockedFunction<typeof UserApi.getAll>;
 
-describe("Hook: Use Users", () => {
+describe("User Hook", () => {
   beforeEach(() => {
     getAll.mockClear();
 
@@ -22,6 +23,7 @@ describe("Hook: Use Users", () => {
   });
 
   it("should handle being called.", () => {
+    getAll.mockResolvedValue({ data: [], status: 200 });
     const { result } = renderHook(() => useUsers());
 
     expect(result.current.isLoading).toBeTruthy();
@@ -51,6 +53,5 @@ describe("Hook: Use Users", () => {
     const { result } = renderHook(() => useUsers());
 
     expect(result.current.isLoading).toBeTruthy();
-    // expect(result.current.data).toEqual([user]);
   });
 });

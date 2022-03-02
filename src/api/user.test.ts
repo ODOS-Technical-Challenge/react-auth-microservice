@@ -29,3 +29,35 @@ describe("Rest Api: User Api - Get All", () => {
     expect(status).toEqual(400);
   });
 });
+
+describe("Rest Api: User Api - Get Current User", () => {
+  beforeEach(() => {
+    mockedAxios.get.mockClear();
+  });
+
+  it("should handle normal api call.", async () => {
+    mockedAxios.get.mockResolvedValue({ status: 200, data: {} });
+
+    const { data, status } = await api.getCurrent();
+
+    expect(data).toBeDefined();
+    expect(status).toEqual(200);
+  });
+
+  it("should handle invalid api call.", async () => {
+    mockedAxios.get.mockRejectedValue({ status: 400, data: "error" });
+
+    const { data, status } = await api.getCurrent();
+
+    expect(data).toEqual({
+      email: "",
+      firstName: "",
+      groups: [],
+      id: "",
+      lastName: "",
+      realmRoles: [],
+      username: "",
+    });
+    expect(status).toEqual(400);
+  });
+});
