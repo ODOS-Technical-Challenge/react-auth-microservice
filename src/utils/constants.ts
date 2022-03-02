@@ -13,3 +13,9 @@ export const SortConstants: { [key: string]: string } = {
   Ascending: "sort-asc",
   Descending: "sort-desc",
 };
+
+export const KeycloakConstants = {
+  Realm: "odos",
+  Url: "https://riva.com/keycloak",
+  Client: "auth-app",
+};

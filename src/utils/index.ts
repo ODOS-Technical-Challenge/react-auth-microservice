@@ -1,5 +1,5 @@
 /** Constants **/
-export { BACKEND_URL } from "./constants";
+export { BACKEND_URL, KeycloakConstants } from "./constants";
 export { ROUTES } from "./routes.constants";
 
 /** Utility Functions **/

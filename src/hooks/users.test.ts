@@ -38,10 +38,13 @@ describe("Hook: Use Users", () => {
 
   it("should handle resolving REST call.", () => {
     const user: UserType = {
+      id: "",
       firstName: "Jane",
       lastName: "Doe",
       username: "jdoe",
       email: "jdoe@synergybis.com",
+      realmRoles: [],
+      groups: [],
     };
 
     getAll.mockResolvedValue({ data: [user], status: 200 });

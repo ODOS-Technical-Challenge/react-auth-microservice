@@ -1,7 +1,6 @@
 import axios from "axios";
 import { UserType } from "../types";
-import { ApiUtils } from "../utils";
-// import { BACKEND_URL } from "../utils";
+import { ApiUtils, BACKEND_URL } from "../utils";
 // import { stringify } from "querystring";
 
 /**
@@ -23,8 +22,41 @@ export async function getAllUsers(params: URLSearchParams) {
 }
 
 /**
+ * Fetch current user using Session Token
+ * @returns
+ */
+export async function getCurrentUser() {
+  const url = `${BACKEND_URL}/user/current`;
+
+  try {
+    const response = await axios.get(url, {
+      responseType: "json",
+      withCredentials: true,
+    });
+
+    console.log(response);
+
+    return {
+      status: response.status,
+      data: response.data,
+    };
+  } catch (error) {
+    return ApiUtils.handle<UserType>(error, {
+      id: "",
+      firstName: "",
+      lastName: "",
+      username: "",
+      email: "",
+      realmRoles: [],
+      groups: [],
+    });
+  }
+}
+
+/**
  * REST User Api Resource
  */
 export const api = {
   getAll: getAllUsers,
+  getCurrent: getCurrentUser,
 };
