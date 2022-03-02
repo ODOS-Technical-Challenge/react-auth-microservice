@@ -12,7 +12,8 @@ module.exports = {
     "^.+\\.(ts|js)x?$": "ts-jest",
   },
   moduleNameMapper: {
-    "\\.(css|scss|png|svg)$": "<rootDir>/mock/styleMock.js",
+    "\\.(css|scss)$": "<rootDir>/mock/styleMock.js",
+    "\\.(png|svg)$": "<rootDir>/mock/fileMock.js",
   },
   setupFilesAfterEnv: ["<rootDir>/src/setupTests.ts"],
   testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",

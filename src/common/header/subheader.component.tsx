@@ -1,6 +1,7 @@
 import React, { FunctionComponent, ReactNode } from "react";
 import { PrimaryNav, Header } from "@trussworks/react-uswds";
 import { ROUTES } from "../../utils";
+import { ReactComponent } from "../../assets/logo.svg";
 
 interface Props {
   children?: ReactNode;
@@ -25,8 +26,7 @@ export const SubHeader: FunctionComponent<Props> = ({ children }: Props) => {
       <div className="usa-nav-container">
         <div className="usa-navbar">
           <a href={ROUTES.Home.path}>
-            {/* <img height={32} src={logo} alt="logo" style={{ margin: "16px" }} /> */}
-            logo
+            <ReactComponent height={64} />
           </a>
           <PrimaryNav items={menuItems}></PrimaryNav>
         </div>
