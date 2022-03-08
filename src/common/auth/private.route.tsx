@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
-import { Route, RouteProps } from "react-router-dom";
+import React, { ReactNode, useEffect } from "react";
 import { Unauthorized } from "./unauthorized.component";
 import { useAuth } from "../../store";
-import { Loading } from "../index";
+import { CenterPane, Loading } from "../index";
 
-interface Props extends RouteProps {
+interface Props {
+  children: ReactNode;
   roles?: string[];
 }
 
@@ -12,7 +12,7 @@ interface Props extends RouteProps {
  * Private Route that handles authentication and authorization
  * @returns
  */
-export const PrivateRoute = ({ element, roles, ...rest }: Props) => {
+export const PrivateRoute = ({ children, roles }: Props) => {
   const userStore = useAuth();
 
   useEffect(() => {
@@ -21,19 +21,15 @@ export const PrivateRoute = ({ element, roles, ...rest }: Props) => {
     }
   }, [userStore]);
 
-  return (
-    <Route
-      {...rest}
-      element={() => {
-        if (!userStore?.token || !userStore?.user.id) {
-          return <Loading />;
-        }
-        if (userStore.isAuthorized(roles)) {
-          return element;
-        } else {
-          return <Unauthorized />;
-        }
-      }}
-    />
-  );
+  if (!userStore?.token || !userStore?.user.id) {
+    return (
+      <CenterPane style={{ marginTop: 64 }}>
+        <Loading />
+      </CenterPane>
+    );
+  }
+  if (userStore.isAuthorized(roles)) {
+    return <div>{children}</div>;
+  }
+  return <Unauthorized />;
 };
