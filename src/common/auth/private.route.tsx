@@ -1,7 +1,7 @@
 import React, { ReactNode, useEffect } from "react";
 import { Unauthorized } from "./unauthorized.component";
-import { useAuth } from "../../store";
 import { CenterPane, Loading } from "../index";
+import { useAuth } from "../../store";
 
 interface Props {
   children: ReactNode;

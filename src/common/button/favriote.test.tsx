@@ -24,4 +24,13 @@ describe("Common Component: Favorite Button", () => {
 
     userEvent.click(button);
   });
+
+  it("should handle user action: on click.", async () => {
+    render(<FavoriteButton initial={true} />);
+
+    const button = await screen.findByRole("button");
+    expect(button).toBeInTheDocument();
+
+    userEvent.click(button);
+  });
 });
