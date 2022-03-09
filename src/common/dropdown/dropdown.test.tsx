@@ -16,6 +16,17 @@ describe("Common Component: Layout Component - Dropdown", () => {
     expect(child).toBeInTheDocument();
   });
 
+  it("should handle title.", async () => {
+    render(
+      <Dropdown initial={false} title="title">
+        <input />
+      </Dropdown>
+    );
+
+    const title = await screen.findByText("title");
+    expect(title).toBeInTheDocument();
+  });
+
   it("should handle user action: on click.", async () => {
     render(
       <Dropdown>
